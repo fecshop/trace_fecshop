@@ -1,0 +1,97 @@
+version: "2"  
+services:  
+  web:  
+    image: nginx:latest  
+    ports:  
+      - "80:80" 
+    restart: always
+    volumes:  
+      - ./app:/www/web
+      - ./services/web/nginx/conf:/etc/nginx
+      - ./services/web/nginx/logs:/www/web_logs
+    networks:
+        - code-network
+  mysql:  
+    image: mysql:5.7 
+    volumes:  
+      - ./db/mysql/data:/var/lib/mysql 
+      - ./db/mysql/example_db:/var/example_db 
+      - ./db/mysql/conf.d:/etc/mysql/conf.d      
+    ports:  
+      - "3306:3306" 
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=Fec123456
+    networks:
+      - code-network 
+  
+  mongodb:
+    image: mongo:3.7
+    restart: always
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/data/logs
+    
+    volumes:
+      - ./db/mongodb/data:/data/db
+      - ./db/mongodb/example_db:/data/example_db
+      - ./db/mongodb/logs:/data/logs
+      - ./db/mongodb/etc/mongod.conf:/etc/mongod.conf
+    command: ["mongod", "--bind_ip", "golang"]
+    ports:
+      - 27017:27017 
+    networks:
+      - code-network 
+      
+  elasticsearch1:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.2.3
+    restart: always
+    container_name: elasticsearch1
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms256m -Xmx256m -XX:+AssumeMP"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    mem_limit: 1g
+    cap_add:
+      - IPC_LOCK
+    volumes:
+      - esdata12:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - code-network
+  golang:  
+    build: 
+      context: ./services/golang/docker/
+    restart: always
+    volumes:  
+      - ./services/golang/etc/fec-go:/etc/fec-go
+      - ./services/golang/ip_lib:/www/test/ip/GeoLite2-City_20180327
+    depends_on:
+      - mongodb
+      - mysql
+      - elasticsearch1
+    networks:
+        - code-network 
+    ports:
+      - 3000:3000
+      
+volumes:
+  esdata12:
+    driver: local      
+      
+networks:
+  code-network:
+    driver: bridge
+        
+        
+        
+        
+        
