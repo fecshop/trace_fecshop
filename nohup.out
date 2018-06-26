@@ -1,5 +1,0 @@
-remote: warning: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.        
-remote: warning: See http://git.io/iEPt8g for more information.        
-remote: warning: File services/golang/ip_lib/GeoLite2-City.mmdb is 58.52 MB; this is larger than GitHub's recommended maximum file size of 50.00 MB        
-To git@github.com:fecshop/trace_fecshop.git
-   a5b3b18..ff59432  master -> master

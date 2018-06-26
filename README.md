@@ -14,7 +14,7 @@ Trace 安装
 
 你的ip：144.202.52.147
 
-你的域名：tc.fecshop.com
+你的域名：tc.fecshop.com ， 将这个域名解析到上面的ip
 
 
 
@@ -187,20 +187,58 @@ exit;
 `exit`，退出容器,回到宿主主机
 
 
+### 访问trace系统，设置网站信息
+
+http://tc.fecshop.com , 默认用户名密码   `admin`  `admin123`
+
+登录后，点击右上角切换中文
+
+点击控制面板，我的账户，修改超级admin账户的密码
+
+添加 普通admin账户(common admin), 添加网站，等操作，详细参看文档
+
+[Fecshop Trace 如何添加网站?](http://www.fecshop.com/doc/fec-go-guide/develop/cn-1.0/guide-trace-fecshop-config.html)
 
 
+按照上面操作完成后，在网站管理，点击编辑框后，可以得到如下的信息
+
+![xxx](http://www.fecshop.com/doc/fec-go-guide/develop/cn-1.0/images/a4.png)
 
 
+### Trace 系统和fecshop系统的对接
 
+> 您需要打开你的fecshop的目录地址，按照下面的文档进行设置。
+
+参看文档：[Fecshop和Trace系统对接](http://www.fecshop.com/doc/fec-go-guide/develop/cn-1.0/guide-trace-fecshop-connect.html)
+
+`website_id`: 就是上面的编辑框中获取的(上面的图)
+
+`access_token`：就是上面的编辑框中获取的(上面的图)
+
+`trace_url`:将对应的值，`'tc.fecshop.com/fec_trace.js'`,中的域名`tc.fecshop.com`,
+改成您自己的域名
+
+`trace_api_url`: 将对应的值，`'http://120.24.37.249:3000/fec/trace/api'`
+中的ip改成您自己的ip，这个地址是golang程序生成的http服务对应的地址，用来接收api数据。
+
+填写完成后，保存即可
+
+这样您访问fecshop的网站（appfront，apphtml5，appserver端），就会有数据传送给
+trace系统
+
+关于trace系统更详细的操作，您可以参看文档：
+[fecshop trace 系统](http://www.fecshop.com/doc/fec-go-guide/develop/cn-1.0/guide-README.html)
 
 
 
 
 ### 设置cron
 
-计划任务，执行统计脚本，这个脚本一天一次即可，你也可以一天2次
+数据对接后，我们需要进行统计，您需要设置计划任务，进行数据统计。
 
-在宿主主机,
+> 计划任务，执行统计脚本，这个脚本一天一次即可，你也可以一天2次
+
+在宿主主机操作：
 
 ```
 mkdir /www
@@ -221,7 +259,13 @@ chmod 777 /www/docker.log
 为了测试，第一次按照您可以按照上面设置成一分钟执行一次，
 完毕后，更改cron执行的周期。
 
+然后，你需要去您的fecshop去访问以下网站，点击一下，让数据传递给trace系统，
+然后等待2分钟看看，是否进行了数据统计。
 
+
+![](https://i.loli.net/2018/06/26/5b319ce47c23e.png)
+
+如果有数据，如图，代表
 
 
 
