@@ -188,7 +188,7 @@ CREATE TABLE `customer` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=104 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -341,7 +341,6 @@ CREATE TABLE `role_info` (
 
 LOCK TABLES `role_info` WRITE;
 /*!40000 ALTER TABLE `role_info` DISABLE KEYS */;
-INSERT INTO `role_info` VALUES (6,93,'营销主管',1521856907,1521856907,15),(7,93,'广告员',1521944700,1521944700,15);
 /*!40000 ALTER TABLE `role_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -383,4 +382,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-06-26  9:27:12
+-- Dump completed on 2018-06-26  9:39:13
