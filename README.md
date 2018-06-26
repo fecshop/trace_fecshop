@@ -90,7 +90,8 @@ sudo curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-c
 
 
 
-### docker compose 安装部署环境
+docker compose 安装部署环境
+--------------------
 
 创建文件夹, 进入文件夹
 
@@ -195,7 +196,8 @@ docker-compose ps
 你会发现`golang`容器在restaring，我们需要导入mysql文件
 
 
-### 创建数据库，导入mysql数据
+创建数据库，导入mysql数据
+----------------
 
 1.进入mysql的容器: `docker-compose exec mysql bash`
 
@@ -232,7 +234,8 @@ docker-compose ps
 下面我们测试一下我们的环境
 
 
-### 访问trace系统，设置网站信息
+访问trace系统，设置网站信息
+------------------
 
 http://tc.fecshop.com , 默认用户名密码   `admin`  `admin123`
 
@@ -250,7 +253,8 @@ http://tc.fecshop.com , 默认用户名密码   `admin`  `admin123`
 ![xxx](http://www.fecshop.com/doc/fec-go-guide/develop/cn-1.0/images/a4.png)
 
 
-### Trace 系统和fecshop系统的对接
+Trace 系统和fecshop系统的对接
+-----------------------
 
 > 您需要打开你的fecshop的目录地址，按照下面的文档进行设置。
 
@@ -277,7 +281,8 @@ trace系统
 
 
 
-### 设置cron
+设置cron
+----------
 
 数据对接后，我们需要进行统计，您需要设置计划任务，进行数据统计。
 
@@ -326,6 +331,7 @@ tail -f /www/docker.log
 ```
 
 
-### 操作文档
+操作文档
+---------
 
 更多的介绍参看文档：http://www.fecshop.com/doc/fec-go-guide/develop/cn-1.0/guide-trace-about.html
