@@ -11,20 +11,21 @@ services:
       - ./services/web/nginx/logs:/www/web_logs
     networks:
         - code-network
+        
   mysql:  
     image: mysql:5.7 
     volumes:  
       - ./db/mysql/data:/var/lib/mysql 
       - ./db/mysql/example_db:/var/example_db 
       - ./db/mysql/conf.d:/etc/mysql/conf.d      
-    ports:  
-      - "3306:3306" 
+    
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=Fec123456
+      - MYSQL_ROOT_PASSWORD=fecshop123
+      - MYSQL_DATABASE=fecshop_trace
     networks:
       - code-network 
-  
+      
   mongodb:
     image: mongo:3.7
     restart: always
@@ -37,9 +38,6 @@ services:
       - ./db/mongodb/example_db:/data/example_db
       - ./db/mongodb/logs:/data/logs
       - ./db/mongodb/etc/mongod.conf:/etc/mongod.conf
-    command: ["mongod", "--bind_ip", "golang"]
-    ports:
-      - 27017:27017 
     networks:
       - code-network 
       

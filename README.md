@@ -1,10 +1,14 @@
-Trace 安装
+Fecshop Trace 系统安装
+
+
+> Fecshop Trace系统是统计系统，下面的任何步骤都需要操作，缺失任何一个步骤都会导致安装失败。
 
 
 环境要求, 准备工作
 -------------------------
 
-1.内存要大于2G，尽量内存要足
+1.建议centos7，需要支持docker（centos6默认内核不支持安装docker）,
+内存要大于2G，尽量内存要足
 
 2.需要一个域名，一个ip, 
 
@@ -25,6 +29,45 @@ Trace 安装
 ```
 
 只将上面的ip替换成您自己的ip即可， `trace.fecshopsoft.com`不要改动
+
+
+
+4.linux环境设置
+
+elasticSearch容器需要设置:`vm.max_map_count = 262144`
+
+```
+[root@localhost ~]# sysctl -a|grep vm.max_map_count
+
+...
+
+vm.max_map_count = 65530
+```
+
+如果值不为`262144`,那么您需要设置，在/etc/sysctl.conf文件最后添加一行：
+
+```
+vm.max_map_count=262144
+```
+
+执行生效, ：
+
+```
+/sbin/sysctl -p
+```
+
+然后查看修改是否生效
+
+```
+[root@localhost ~]# sysctl -a|grep vm.max_map_count
+
+...
+
+vm.max_map_count = 262144
+
+```
+
+如果值为`262144`,则说明设置成功
 
 
 安装docker和docker compose
@@ -81,7 +124,8 @@ mem_limit: 1g
 
 如果您的内存只有2g，可以按照这个配置，如果您的内存比较大，可以修改这几个内存配置参数
 
-如果要更改， `-Xms256m -Xmx256m`的值要一致。
+如果要更改， `-Xms256m -Xmx256m`的值要一致。否则就会报错：
+[initial heap size [268435456] not equal to maximum heap size [1073741824]; this can cause resize pauses and prevents mlockall from locking the entire heap](http://www.fecshop.com/topic/1173)
 
 1.3配置golang部分的密码
 
@@ -111,6 +155,12 @@ img.src = '//144.202.52.147:3000/fec/trace?' + args;
 
 将`144.202.52.147`替换成您自己的ip。
 
+1.5设置nginx域名
+
+打开 `./services/web/nginx/conf/conf.d/default.conf`
+
+将`tc.fecshop.com` 改成您自己的域名
+
 
 2.构建：
 
@@ -126,8 +176,6 @@ service docker start
 docker-compose build --no-cache
 ```
 
-如果您在构建的过程中，出现因为网速问题，导致的安装失败，可以将 `docker-compose.yml.aliyun` 内容覆盖 `docker-compose.yml` ,全部使用阿里云
-的镜像（镜像是由fecshop上传的）。
 
 曾经有人遇到过这个问题，估计是网络问题：http://www.fecshop.com/topic/641
 
@@ -144,38 +192,16 @@ docker-compose up -d
 docker-compose ps
 ```
 
-进入某个容器,譬如php：
-
-```
-docker-compose exec golang bash
-```
-
-退出某个容器
-
-```
-exit
-```
-
-
-停止 docker compose启动的容器：
-
-```
-docker-compose stop
-```
-
-
-到这里我们的环境就安装好了，也讲述了一些docker compose常用的命令，
-下面我们测试一下我们的环境
+你会发现`golang`容器在restaring，我们需要导入mysql文件
 
 
 ### 创建数据库，导入mysql数据
 
 1.进入mysql的容器: `docker-compose exec mysql bash`
 
-执行mysql -uroot -p 进入mysql, 密码是yml中的密码
+执行`mysql -uroot -p` 进入mysql, 密码是yml中的密码
 
 ```
-create database fecshop_trace;
 show databases;
 use fecshop_trace;
 
@@ -185,6 +211,25 @@ exit;
 ```
 
 `exit`，退出容器,回到宿主主机
+
+
+docker compose重启：
+
+```
+docker-compose stop
+
+docker-compose up -d
+```
+
+查看状态
+
+```
+docker-compose ps
+```
+
+
+到这里我们的环境就安装好了，也讲述了一些docker compose常用的命令，
+下面我们测试一下我们的环境
 
 
 ### 访问trace系统，设置网站信息
@@ -249,10 +294,10 @@ chmod 777 /www/docker.log
 执行`crontab -e`,添加下面的代码
 
 ```
-* * * * * cd /www/docker && /usr/local/bin/docker-compose  exec -T golang /www/golang/fec-go-shell >> /www/docker.log 2>&1
+* * * * * cd /www/docker/trace_fecshop && /usr/local/bin/docker-compose  exec -T golang /www/golang/fec-go-shell >> /www/docker.log 2>&1
 ```
 
-注意，如果您按照文档， 您是在`/www/docker`中进行的安装，
+注意，如果您按照文档， 您是在`/www/docker/trace_fecshop`中进行的安装，
 如果不是，请替换文件路径
 
 
