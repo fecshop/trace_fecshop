@@ -303,16 +303,22 @@ chmod 777 /www/docker.log
 * * * * * /usr/bin/wget http://144.202.52.147:3000/fec/trace/cronssss >  /dev/null
 ```
 
-注意1: 如果您按照文档， 您是在`/www/docker/trace_fecshop`中进行的安装，
+> 注意1: 如果您按照文档， 您是在`/www/docker/trace_fecshop`中进行的安装，
 如果不是，请替换文件路径
 
-注意2：上面第二行cron设置中的ip `144.202.52.147` 替换成您自己的ip，
+> 注意2：上面第二行cron设置中的ip `144.202.52.147` 替换成您自己的ip，
 这个是更新缓存数据的脚本，这个每分钟跑一次。
 
 
-为了测试，第一次按照您可以按照上面设置成一分钟执行一次，
-完毕后，更改cron执行的周期，
-将第一个cron脚本改成一天跑1次，或者2次即可。
+为了测试，第一次安装您可以按照上面设置成一分钟执行一次，测试完成后，您将
+第一个cron脚本，也就是统计脚本改成一天跑1次，或者2次即可。譬如,每天的9点跑一次脚本
+
+```
+01 9 * * * cd /www/docker/trace_fecshop && /usr/local/bin/docker-compose  exec -T golang /www/golang/fec-go-shell 2 >> /www/docker.log 2>&1
+```
+
+第二个cron脚本，每分钟跑一次，用于更新缓存，这个不用改动
+
 
 然后，等2分钟左右，你需要去您的fecshop去访问以下网站，点击一下，让数据传递给trace系统
 
@@ -330,8 +336,52 @@ chmod 777 /www/docker.log
 tail -f /www/docker.log
 ```
 
+手动执行统计脚本
+---------------
+
+1.今天和昨天的数据统计
+
+```
+cd /www/docker/trace_fecshop
+/usr/local/bin/docker-compose  exec -T golang /www/golang/fec-go-shell 2
+```
+
+2.跑最近10天的历史数据
+
+```
+cd /www/docker/trace_fecshop
+/usr/local/bin/docker-compose  exec -T golang /www/golang/fec-go-shell 10
+```
+
+也就是最后一个参数，代表的是跑最近几天的数据。
+
 
 操作文档
 ---------
 
 更多的介绍参看文档：http://www.fecshop.com/doc/fec-go-guide/develop/cn-1.0/guide-trace-about.html
+
+
+生产环境 - 关于线上统计
+-----------
+
+线上环境，为了更好的收集服务端发送的数据，请将追踪系统和您的商城放到一个服务商的机房里面
+，尽量放到一个机房里面，这样服务端收集数据会更加的准确。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
