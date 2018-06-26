@@ -110,7 +110,7 @@ git clone https://github.com/fecshop/trace_fecshop.git
 1.1更改mysql的密码：
 
 ```
-- MYSQL_ROOT_PASSWORD=fecshopxfd3ffaads123456
+- MYSQL_ROOT_PASSWORD=Fec123456
 ```
 
 1.2更改elasticsearch1的内存设置
