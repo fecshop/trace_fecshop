@@ -370,9 +370,17 @@ cd /www/docker/trace_fecshop
 
 
 
+备：
+----
 
 
+1.golang部分在阿里云服务器，vue部分直接直接从github拖动到windows里面安装即可，
+feiqin的win10里面的vue部分需要重新拖下来
 
+2.如果功能有问题，修复，然后重新上传打包后的文件，
+二进制部分从golang里面build，vue部分使用win10里面的build，覆盖即可。
+
+3.验证授权安全
 
 
 
