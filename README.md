@@ -24,7 +24,11 @@ Fecshop Trace 系统安装
 
 
 
-3.添加host：打开win host C:\Windows\System32\drivers\etc\hosts
+3.
+
+3.1国外服务器
+
+添加host：打开win host C:\Windows\System32\drivers\etc\hosts
 
 ```
 144.202.52.147  trace.fecshopsoft.com
@@ -32,7 +36,9 @@ Fecshop Trace 系统安装
 
 只将上面的ip替换成您自己的ip即可，也就是上面19行部分的域名， `trace.fecshopsoft.com`不要改动
 
-3.2如果是国内主机，那么需要通过vue，在 ./config/prod.env.js 里面填写相应的域名即可，也就是上面的域名2，然后重新生成。
+3.2国内主机
+
+需要通过vue，在 ./config/prod.env.js 里面填写相应的域名即可，也就是上面的域名2，然后重新通过npm编译生成。
 
 
 4.linux环境设置
@@ -138,15 +144,10 @@ mem_limit: 1g
 ```
 # 修改数据库密码，这个值用上面的yml中配置的mysql密码
 mysql_password  = Fec123456
+# 监听的ip，如果出现问题，可以将0.0.0.0 改成 相应的ip
+httpHost = 0.0.0.0:3000
 ```
 
-1.4在宿主主机中创建文件夹
-
-用来存放上传的excel文件
-
-```
-mkdir  -p /www/test/xlsx
-```
 
 1.5更改trace.js
 
@@ -154,16 +155,20 @@ mkdir  -p /www/test/xlsx
 拉到页面底部，可以看到
 
 ```
-img.src = '//144.202.52.147:3000/fec/trace?' + args;
+img.src = '//tracejs1.fecshop.com/fec/trace?' + args;
 ```
 
-将`144.202.52.147`替换成您自己的ip。
+将`tracejs1.fecshop.com`替换成您自己的域名。
 
 1.5设置nginx域名
 
 打开 `./services/web/nginx/conf/conf.d/default.conf`
 
-将`tc.fecshop.com` 改成您自己的域名
+将`tc1.fecshop.com`替换成您自己的域名。
+
+将`tracejs1.fecshop.com`替换成您自己的域名。
+
+将`144.202.52.147`替换成您自己的Ip。
 
 
 2.构建：
@@ -267,10 +272,10 @@ Trace 系统和fecshop系统的对接
 
 `access_token`：就是上面的编辑框中获取的(上面的图)
 
-`trace_url`:将对应的值，`'tc.fecshop.com/fec_trace.js'`,中的域名`tc.fecshop.com`,
+`trace_url`:将对应的值，`'tc1.fecshop.com/fec_trace.js'`,中的域名`tc1.fecshop.com`,
 改成您自己的域名
 
-`trace_api_url`: 将对应的值，`'http://120.24.37.249:3000/fec/trace/api'`
+`trace_api_url`: 将对应的值，`'http://tracejs1.fecshop.com/fec/trace/api'`
 中的ip改成您自己的ip，这个地址是golang程序生成的http服务对应的地址，用来接收api数据。
 
 填写完成后，保存即可
