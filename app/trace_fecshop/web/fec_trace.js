@@ -1213,5 +1213,5 @@
 
     //通过Image对象请求后端脚本
     var img = new Image(1, 1);
-    img.src = '//144.202.52.147:3000/fec/trace?' + args;
+    img.src = '//tracejs1.fecshop.com/fec/trace?' + args;
 })();
