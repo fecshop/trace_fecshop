@@ -70,8 +70,13 @@ services:
     restart: always
     volumes:  
       - ./services/golang/etc/fec-go:/etc/fec-go
-      - ./services/golang/xlsx:/www/test/xlsx
       - ./services/golang/ip_lib:/www/test/ip/GeoLite2-City_20180327
+	  - ./services/golang/logs/fec-go/global.log:/www/web_logs/fec-go/global.log
+	  - ./services/golang/logs/fec-go/router_info.log:/www/web_logs/fec-go/router_info.log
+	  - ./services/golang/logs/fec-go/router_error.log:/www/web_logs/fec-go/router_error.log
+	  - ./services/golang/logs/fec-go-shell/global.log:/www/web_logs/fec-go-shell/global.log
+	  - ./services/golang/logs/fec-go-shell/router_info.log:/www/web_logs/fec-go-shell/router_info.log
+	  - ./services/golang/logs/fec-go-shell/router_error.log:/www/web_logs/fec-go-shell/router_error.log
     depends_on:
       - mongodb
       - mysql
