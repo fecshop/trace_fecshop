@@ -70,6 +70,7 @@ services:
     restart: always
     volumes:  
       - ./services/golang/etc/fec-go:/etc/fec-go
+      - ./services/golang/xlsx:/www/test/xlsx
       - ./services/golang/ip_lib:/www/test/ip/GeoLite2-City_20180327
     depends_on:
       - mongodb
