@@ -18,7 +18,9 @@ Fecshop Trace 系统安装
 
 你的ip：144.202.52.147
 
-你的域名：tc.fecshop.com ， 将这个域名解析到上面的ip
+你的域名1：tc1.fecshop.com ， 将这个域名解析到上面的ip，这个域名作为统计系统界面部分，也就是访问vue展示部分的域名
+
+你的域名2：tracejs1.fecshop.com, 这个域名作为golang部分的nginx反向代理的域名，也就是fecshop商城传送数据，传递给该域名，nginx接收到后，代理到golang。
 
 
 
@@ -28,8 +30,9 @@ Fecshop Trace 系统安装
 144.202.52.147  trace.fecshopsoft.com
 ```
 
-只将上面的ip替换成您自己的ip即可， `trace.fecshopsoft.com`不要改动
+只将上面的ip替换成您自己的ip即可，也就是上面19行部分的域名， `trace.fecshopsoft.com`不要改动
 
+3.2如果是国内主机，那么需要通过vue，在 ./config/prod.env.js 里面填写相应的域名即可，也就是上面的域名2，然后重新生成。
 
 
 4.linux环境设置
