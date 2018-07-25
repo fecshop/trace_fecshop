@@ -257,9 +257,6 @@ docker-compose ps
 ------------------
 
 
-
-
-
 1.测试访问
 
 如果：http://207.148.8.72:3000/fec/trace ， 可以访问
@@ -362,6 +359,31 @@ TRACE_JS_URL: '"tc1.fecshop.com/fec_trace.js"',
 执行完即可。
 
 
+
+设置开机启动
+-------------
+
+
+1.开机启动docker
+```
+systemctl enable docker.service
+
+```
+
+2.docker-compose启动
+
+```
+vim /etc/rc.d/rc.local
+/usr/local/bin/docker-compose -f /www/docker/trace_fecshop/docker-compose.yml up -d
+```
+
+ /www/docker/trace_fecshop 是你的安装目录
+ 
+
+
+
+
+
 设置cron
 ----------
 
@@ -450,7 +472,12 @@ cd /www/docker/trace_fecshop
 ，尽量放到一个机房里面，这样服务端收集数据会更加的准确。
 
 
-2.在Docker容器环境中用Let's Encrypt部署HTTPS，追踪js使用https
+生产环境的js接收数据使用https
+-------
+
+如果fecshop的商城使用了https，那么，追踪js也必须是https，否则将导致无法接收数据
+
+在Docker容器环境中用Let's Encrypt部署HTTPS，追踪js使用https
 
 参看文档：http://www.fecshop.com/topic/1249 
 
