@@ -10,6 +10,17 @@ Fecshop Trace 系统安装
 1.建议centos7，需要支持docker（centos6默认内核不支持安装docker）,
 内存要大于2G，尽量内存要足
 
+**永久关闭Selinux**  , 这个一定要执行，否则nginx反向代理无法执行
+
+```
+vim /etc/sysconfig/selinux
+
+SELINUX=enforcing 改为 SELINUX=disabled
+
+重启服务reboot
+
+```
+
 2.需要一个域名，一个ip, 
 
 > 域名自己准备，ip就是您安装的服务器的ip,下面是例子，后面以这个例子
@@ -245,7 +256,45 @@ docker-compose ps
 访问trace系统，设置网站信息
 ------------------
 
-http://tc.fecshop.com , 默认用户名密码   `admin`  `admin123`
+
+
+
+
+1.测试访问
+
+如果：http://207.148.8.72:3000/fec/trace ， 可以访问
+
+而：http://tracejs1.fecshop.com/fec/trace ， nginx报错502 Bad Gateway
+
+需要检查：
+
+1.1**永久关闭Selinux**  , 这个一定要执行，否则nginx反向代理无法执行
+
+```
+vim /etc/sysconfig/selinux
+
+SELINUX=enforcing 改为 SELINUX=disabled
+
+重启服务reboot
+
+```
+
+1.2检查centos7防火墙
+
+执行
+
+```
+firewall-cmd --zone=public --add-port=80/tcp --permanent   （--permanent永久生效，没有此参数重启后失效）
+重新载入
+firewall-cmd --reload
+```
+
+然后就可以了
+
+
+2.设置trace系统和fecshop商城对接
+
+http://tc1.fecshop.com , 默认用户名密码   `admin`  `admin123`
 
 登录后，点击右上角切换中文
 
