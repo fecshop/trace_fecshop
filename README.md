@@ -10,16 +10,6 @@ Fecshop Trace 系统安装
 1.建议centos7，需要支持docker（centos6默认内核不支持安装docker）,
 内存要大于2G，尽量内存要足
 
-**永久关闭Selinux**  , 这个一定要执行，否则nginx反向代理无法执行
-
-```
-vim /etc/sysconfig/selinux
-
-SELINUX=enforcing 改为 SELINUX=disabled
-
-重启服务reboot
-
-```
 
 2.需要二个域名，一个ip, 
 
@@ -35,21 +25,7 @@ SELINUX=enforcing 改为 SELINUX=disabled
 
 
 
-3.host映射
 
-3.1国外服务器
-
-添加host：打开win host C:\Windows\System32\drivers\etc\hosts
-
-```
-144.202.52.147  trace.fecshopsoft.com
-```
-
-只将上面的ip替换成您自己的ip即可，也就是上面19行部分的域名， `trace.fecshopsoft.com`不要改动
-
-3.2国内主机
-
-需要通过vue，在 ./config/prod.env.js 里面填写相应的域名即可，也就是上面的域名2，然后重新通过npm编译生成。
 
 
 4.linux环境设置
@@ -180,6 +156,16 @@ img.src = '//tracejs1.fecshop.com/fec/trace?' + args;
 将`tracejs1.fecshop.com`替换成您自己的域名。
 
 将`144.202.52.147`替换成您自己的Ip。
+
+
+1.6.重新生成vue文件。
+
+需要打开vue（element）端，将config/prod.env.js
+里面的`BASE_API: '"http://tracejs1.fecshop.com"'` 更改相应的域名，
+然后重新生成html文件，然后将生成后的文件ftp上传到
+`./app/trace_fecshop/web/`下
+即可。
+
 
 
 2.构建：
@@ -403,7 +389,7 @@ chmod 777 /www/docker.log
 
 ```
 * * * * * cd /www/docker/trace_fecshop && /usr/local/bin/docker-compose  exec -T golang /www/golang/fec-go-shell >> /www/docker.log 2>&1
-* * * * * /usr/bin/wget http://144.202.52.147:3000/fec/trace/cronssss >  /dev/null
+* * * * * /usr/bin/wget http://tracejs1.fecshop.com/fec/trace/cronssss >  /dev/null
 ```
 
 > 注意1: 如果您按照文档， 您是在`/www/docker/trace_fecshop`中进行的安装，
@@ -480,6 +466,9 @@ cd /www/docker/trace_fecshop
 在Docker容器环境中用Let's Encrypt部署HTTPS，追踪js使用https
 
 参看文档：http://www.fecshop.com/topic/1249 
+
+
+cron里面的刷新，也要将url改成`https`
 
 
 用户上线
