@@ -336,6 +336,30 @@ trace系统
 [fecshop trace 系统](http://www.fecshop.com/doc/fec-go-guide/develop/cn-1.0/guide-README.html)
 
 
+3.配置trace系统和vue端的对接
+
+打开文件 config/prod.env.js
+
+将 
+
+```
+TRACE_ENABLE: '"true"',
+TRACE_WEBSITE_ID: '"9b17f5b4-b96f-46fd-abe6-a579837ccdd9"',
+TRACE_JS_URL: '"tc1.fecshop.com/fec_trace.js"',
+```
+
+3.1`TRACE_ENABLE`:设置成`true`
+
+3.2`TRACE_WEBSITE_ID`:设置成上面的website_id
+
+3.3`TRACE_JS_URL`:将`tc1.fecshop.com`设置成你自己的域名。
+
+
+然后重新编译vue端
+
+`npm run build`
+
+执行完即可。
 
 
 设置cron
@@ -425,6 +449,10 @@ cd /www/docker/trace_fecshop
 线上环境，为了更好的收集服务端发送的数据，请将追踪系统和您的商城放到一个服务商的机房里面
 ，尽量放到一个机房里面，这样服务端收集数据会更加的准确。
 
+
+2.在Docker容器环境中用Let's Encrypt部署HTTPS，追踪js使用https
+
+参看文档：http://www.fecshop.com/topic/1249
 
 
 备：
