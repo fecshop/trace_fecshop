@@ -21,7 +21,7 @@ SELINUX=enforcing 改为 SELINUX=disabled
 
 ```
 
-2.需要一个域名，一个ip, 
+2.需要二个域名，一个ip, 
 
 > 域名自己准备，ip就是您安装的服务器的ip,下面是例子，后面以这个例子
 进行配置，您可以将下面的值替换成您自己的ip和域名
@@ -35,7 +35,7 @@ SELINUX=enforcing 改为 SELINUX=disabled
 
 
 
-3.
+3.host映射
 
 3.1国外服务器
 
@@ -281,7 +281,7 @@ SELINUX=enforcing 改为 SELINUX=disabled
 执行
 
 ```
-firewall-cmd --zone=public --add-port=80/tcp --permanent   （--permanent永久生效，没有此参数重启后失效）
+firewall-cmd --zone=public --add-port=3000/tcp --permanent   （--permanent永久生效，没有此参数重启后失效）
 重新载入
 firewall-cmd --reload
 ```
