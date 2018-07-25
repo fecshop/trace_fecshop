@@ -482,6 +482,16 @@ cd /www/docker/trace_fecshop
 参看文档：http://www.fecshop.com/topic/1249 
 
 
+用户上线
+--------
+
+
+需要打开vue（element）端，将config/prod.env.js
+里面的`BASE_API: '"http://tracejs1.fecshop.com"'` 更改相应的域名，
+然后重新生成html文件，然后将生成后的文件上传到
+`./app/trace_fecshop/web`
+即可。
+
 备：
 ----
 
