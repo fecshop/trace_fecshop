@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2018 年 07 月 25 日 09:07
+-- 生成日期: 2018 年 07 月 26 日 10:58
 -- 服务器版本: 5.6.14
 -- PHP 版本: 5.4.34
 
@@ -268,16 +268,17 @@ CREATE TABLE IF NOT EXISTS `customer` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=108 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=109 ;
 
 --
 -- 转存表中的数据 `customer`
 --
 
 INSERT INTO `customer` (`id`, `username`, `type`, `parent_id`, `password`, `created_at`, `updated_at`, `email`, `name`, `sex`, `telephone`, `access_token`, `status`, `age`, `remark`, `birth_date`, `market_group_id`, `job_type`, `payment_end_time`, `website_count`, `website_day_max_count`) VALUES
-(15, 'admin', 1, NULL, '0192023a7bbd73250516f069df18b500', 1519978859, 1532354950, 'zqy234@126.com', 'Terry', 2, '1855343432', NULL, 1, 32, '<!DOCTYPE html><br /><html><br /><head><br /></head><br /><body>\nFecshop 创始人\n</body><br /></html>', 534096000, 1, 1, 0, 0, 0),
-(94, 'terry', 2, NULL, '96e79218965eb72c92a549dd5a330112', 1532351937, 1532352607, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 1, 1, 0, 0, 0),
-(96, 'maria', 2, NULL, '96e79218965eb72c92a549dd5a330112', 1532354872, 1532354872, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 0, 2, 0, 0, 0);
+(15, 'admin', 1, NULL, 'fd6081a2edf452028fcca92c7e446fac', 1519978859, 1532354950, 'zqy234@126.com', 'Terry', 2, '1855343432', NULL, 1, 32, '<!DOCTYPE html><br /><html><br /><head><br /></head><br /><body>\nFecshop 创始人\n</body><br /></html>', 534096000, 1, 1, 0, 0, 0),
+(94, 'terry', 2, NULL, '0769fdb61578a86bb7a5f31af61230b7', 1532351937, 1532573869, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 1, 1, 0, 0, 0),
+(96, 'maria', 2, NULL, '54b2b8329a72f86e0281cedf397ca812', 1532354872, 1532573874, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 0, 2, 0, 0, 0),
+(108, 'test', 2, NULL, 'cc03e747a6afbbcbf8be7668acfebee5', 1532571372, 1532571372, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 1, 1, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -295,7 +296,7 @@ CREATE TABLE IF NOT EXISTS `customer_role` (
   `updated_at` int(20) DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`),
   KEY `own_id` (`own_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=31 ;
 
 --
 -- 转存表中的数据 `customer_role`
@@ -312,7 +313,8 @@ INSERT INTO `customer_role` (`id`, `own_id`, `customer_id`, `role_id`, `created_
 (26, NULL, 101, 7, 15, 1532351877, 1532351877),
 (27, NULL, 104, 6, 15, 1532351945, 1532351945),
 (28, NULL, 15, 6, 15, 1532352892, 1532352892),
-(29, NULL, 15, 7, 15, 1532352892, 1532352892);
+(29, NULL, 15, 7, 15, 1532352892, 1532352892),
+(30, NULL, 108, 11, 15, 1532571694, 1532571694);
 
 -- --------------------------------------------------------
 
@@ -380,13 +382,6 @@ INSERT INTO `resource` (`id`, `name`, `url_key`, `request_method`, `group_id`, `
 (29, '小组更新', '/v1/common/marketgroup/updateone', 3, '13', 15, 1528084969, 1528084969),
 (30, '小组删除', '/v1/common/marketgroup/deleteone', 4, '13', 15, 1528084998, 1528084998),
 (31, '小组批量删除', '/v1/common/marketgroup/deletebatch', 4, '13', 15, 1528085022, 1528085022),
-(32, '员工列表', '/v1/customer/child/list', 1, '14', 15, 1528085088, 1528085088),
-(33, '员工新增', '/v1/customer/child/addone', 2, '14', 15, 1528085111, 1528085111),
-(34, '员工更新', '/v1/customer/child/updateone', 3, '14', 15, 1528085626, 1528085626),
-(35, '员工删除', '/v1/customer/child/deleteone', 4, '14', 15, 1528085645, 1528085645),
-(36, '员工批量删除', '/v1/customer/child/deletebatch', 4, '14', 15, 1528085666, 1528085666),
-(37, '员工权限获取', '/v1/customer/child/role/allandselected', 1, '14', 15, 1528085774, 1528085774),
-(38, '员工权限更新', '/v1/customer/child/role/updateone', 3, '14', 15, 1528085799, 1528085799),
 (39, '站点列表', '/v1/whole/site/list', 1, '15', 15, 1528093410, 1528093410),
 (40, '站点趋势', '/whole/site/fetchtrendinfo', 1, '15', 15, 1528093434, 1528093434),
 (41, 'App入口列表', '/v1/whole/app/list', 1, '16', 15, 1528093483, 1528093483),
@@ -471,7 +466,6 @@ INSERT INTO `resource_group` (`id`, `name`, `created_at`, `updated_at`, `created
 (11, '基础信息 - 网站管理', 1528083912, 1528083912, 15),
 (12, '基础信息 - 渠道管理', 1528083922, 1528083922, 15),
 (13, '基础信息 - 营销小组', 1528083933, 1528083933, 15),
-(14, '基础信息 - 员工管理', 1528083942, 1528083942, 15),
 (15, '全部流量统计 - 站点', 1528085910, 1528085910, 15),
 (16, '全部流量统计 - App入口', 1528085918, 1528085918, 15),
 (17, '全部流量统计 - 来源', 1528085923, 1528085923, 15),
@@ -512,7 +506,7 @@ CREATE TABLE IF NOT EXISTS `role_info` (
   `created_customer_id` int(20) DEFAULT NULL COMMENT 'role的创建人',
   PRIMARY KEY (`id`),
   KEY `own_id` (`own_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- 转存表中的数据 `role_info`
@@ -520,7 +514,8 @@ CREATE TABLE IF NOT EXISTS `role_info` (
 
 INSERT INTO `role_info` (`id`, `own_id`, `name`, `created_at`, `updated_at`, `created_customer_id`) VALUES
 (6, 93, '营销主管', 1521856907, 1532352981, 15),
-(7, 93, '广告员', 1521944700, 1521944700, 15);
+(7, 93, '广告员', 1521944700, 1521944700, 15),
+(11, NULL, '外部测试', 1532571280, 1532571280, 15);
 
 -- --------------------------------------------------------
 
@@ -537,7 +532,7 @@ CREATE TABLE IF NOT EXISTS `role_resource` (
   `updated_at` int(20) DEFAULT NULL COMMENT '更新时间',
   `created_at` int(20) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=733 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=887 ;
 
 --
 -- 转存表中的数据 `role_resource`
@@ -650,7 +645,59 @@ INSERT INTO `role_resource` (`id`, `own_id`, `role_id`, `resource_id`, `created_
 (729, NULL, 6, 82, 15, 1532410979, 1532410979),
 (730, NULL, 6, 83, 15, 1532410979, 1532410979),
 (731, NULL, 6, 97, 15, 1532410979, 1532410979),
-(732, NULL, 6, 98, 15, 1532410979, 1532410979);
+(732, NULL, 6, 98, 15, 1532410979, 1532410979),
+(835, NULL, 11, 41, 15, 1532573747, 1532573747),
+(836, NULL, 11, 42, 15, 1532573747, 1532573747),
+(837, NULL, 11, 45, 15, 1532573747, 1532573747),
+(838, NULL, 11, 46, 15, 1532573747, 1532573747),
+(839, NULL, 11, 47, 15, 1532573747, 1532573747),
+(840, NULL, 11, 48, 15, 1532573747, 1532573747),
+(841, NULL, 11, 55, 15, 1532573747, 1532573747),
+(842, NULL, 11, 56, 15, 1532573747, 1532573747),
+(843, NULL, 11, 57, 15, 1532573747, 1532573747),
+(844, NULL, 11, 58, 15, 1532573747, 1532573747),
+(845, NULL, 11, 61, 15, 1532573747, 1532573747),
+(846, NULL, 11, 62, 15, 1532573747, 1532573747),
+(847, NULL, 11, 49, 15, 1532573747, 1532573747),
+(848, NULL, 11, 50, 15, 1532573747, 1532573747),
+(849, NULL, 11, 51, 15, 1532573747, 1532573747),
+(850, NULL, 11, 52, 15, 1532573747, 1532573747),
+(851, NULL, 11, 43, 15, 1532573747, 1532573747),
+(852, NULL, 11, 44, 15, 1532573747, 1532573747),
+(853, NULL, 11, 63, 15, 1532573747, 1532573747),
+(854, NULL, 11, 64, 15, 1532573747, 1532573747),
+(855, NULL, 11, 53, 15, 1532573747, 1532573747),
+(856, NULL, 11, 54, 15, 1532573747, 1532573747),
+(857, NULL, 11, 39, 15, 1532573747, 1532573747),
+(858, NULL, 11, 40, 15, 1532573747, 1532573747),
+(859, NULL, 11, 59, 15, 1532573747, 1532573747),
+(860, NULL, 11, 60, 15, 1532573747, 1532573747),
+(861, NULL, 11, 16, 15, 1532573747, 1532573747),
+(862, NULL, 11, 14, 15, 1532573747, 1532573747),
+(863, NULL, 11, 12, 15, 1532573747, 1532573747),
+(864, NULL, 11, 13, 15, 1532573747, 1532573747),
+(865, NULL, 11, 15, 15, 1532573747, 1532573747),
+(866, NULL, 11, 79, 15, 1532573747, 1532573747),
+(867, NULL, 11, 80, 15, 1532573747, 1532573747),
+(868, NULL, 11, 75, 15, 1532573747, 1532573747),
+(869, NULL, 11, 76, 15, 1532573747, 1532573747),
+(870, NULL, 11, 65, 15, 1532573747, 1532573747),
+(871, NULL, 11, 66, 15, 1532573747, 1532573747),
+(872, NULL, 11, 67, 15, 1532573747, 1532573747),
+(873, NULL, 11, 68, 15, 1532573747, 1532573747),
+(874, NULL, 11, 69, 15, 1532573747, 1532573747),
+(875, NULL, 11, 70, 15, 1532573747, 1532573747),
+(876, NULL, 11, 71, 15, 1532573747, 1532573747),
+(877, NULL, 11, 72, 15, 1532573747, 1532573747),
+(878, NULL, 11, 73, 15, 1532573747, 1532573747),
+(879, NULL, 11, 74, 15, 1532573747, 1532573747),
+(880, NULL, 11, 77, 15, 1532573747, 1532573747),
+(881, NULL, 11, 78, 15, 1532573747, 1532573747),
+(882, NULL, 11, 81, 15, 1532573747, 1532573747),
+(883, NULL, 11, 82, 15, 1532573747, 1532573747),
+(884, NULL, 11, 83, 15, 1532573747, 1532573747),
+(885, NULL, 11, 97, 15, 1532573747, 1532573747),
+(886, NULL, 11, 98, 15, 1532573747, 1532573747);
 
 -- --------------------------------------------------------
 
