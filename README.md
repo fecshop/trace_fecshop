@@ -11,7 +11,7 @@ Fecshop Trace 系统安装
 
 http://trace.fecshop.com
 
-测试账户：  test  test123  （清不要修改密码）
+测试账户：  test  test123  （请不要修改密码）
 
 
 源码地址
