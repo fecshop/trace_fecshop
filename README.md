@@ -1,6 +1,11 @@
 
 Fecshop Trace 系统安装
 
+文档
+----
+
+用户行为分析系统文档： http://www.fecshop.com/doc/fec-go-guide/develop/cn-1.0/guide-README.html
+
 演示地址
 ------
 
@@ -16,7 +21,7 @@ http://trace.fecshop.com
 前端vue部分github地址： https://github.com/fecshopsoft/vue-element-admin
 
 本部分是通过golang编译好了的文件，也就是将go的代码生成了二进制文件，然后用docker来快速部署，
-如果你想自己来编辑，可以使用上面的go github地址的源码
+如果你想自己来编辑，可以使用上面的go github地址的源码，自己编译
 
 下面说一下本部分：
 
