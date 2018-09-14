@@ -1,5 +1,24 @@
+
 Fecshop Trace 系统安装
 
+演示地址
+------
+
+http://trace.fecshop.com
+
+测试账户：  test  test123  （清不要修改密码）
+
+
+源码地址
+-------
+
+后端go部分github地址： https://github.com/fecshopsoft/fec-go
+前端vue部分github地址： https://github.com/fecshopsoft/vue-element-admin
+
+本部分是通过golang编译好了的文件，也就是将go的代码生成了二进制文件，然后用docker来快速部署，
+如果你想自己来编辑，可以使用上面的go github地址的源码
+
+下面说一下本部分：
 
 > Fecshop Trace系统是统计系统，下面的任何步骤都需要操作，缺失任何一个步骤都会导致安装失败。
 
@@ -160,7 +179,9 @@ img.src = '//tracejs1.fecshop.com/fec/trace?' + args;
 
 1.6.重新生成vue文件。
 
-需要打开vue（element）端，将config/prod.env.js
+> 在开始的部分已经写了vue的github地址， 也就是：  https://github.com/fecshopsoft/vue-element-admin
+
+打开vue的github地址，下载文件，安装， 需要打开vue（element）端，将config/prod.env.js
 里面的`BASE_API: '"http://tracejs1.fecshop.com"'` 更改相应的域名，
 然后重新生成html文件，然后将生成后的文件ftp上传到
 `./app/trace_fecshop/web/`下
