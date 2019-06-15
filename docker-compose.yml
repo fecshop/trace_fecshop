@@ -83,8 +83,8 @@ services:
       - elasticsearch1
     networks:
         - code-network 
-    ports:
-      - 3000:3000
+    #ports:
+    #  - 3000:3000
       
 volumes:
   esdata12:
